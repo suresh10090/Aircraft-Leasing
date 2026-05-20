@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "Aircraft Leasing"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "50152015-49c4-4045-8921-df92802cc37d"
+  }
+}

@@ -1,0 +1,142 @@
+table DimDate
+	lineageTag: 6c6e019f-c677-4489-a9cb-3e88c184991f
+	dataCategory: Time
+
+	column Date
+		isKey
+		formatString: General Date
+		lineageTag: 0677ddfa-8b68-4432-8275-7a375c10ac2d
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date]
+
+		annotation SummarizationSetBy = Automatic
+
+	column DateKey
+		formatString: 0
+		lineageTag: f1e711f0-ae21-456f-a17e-ac6db4c394a7
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [DateKey]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year
+		formatString: 0
+		lineageTag: d1ba230d-821c-437f-b382-dfa62a841736
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Year]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Number'
+		formatString: 0
+		lineageTag: 6db1c0a0-35ca-473a-9565-88a925b38b47
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Month Number]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Short'
+		lineageTag: 49cbedda-c1c1-4a07-bb16-5232f4b95090
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Month Short]
+		sortByColumn: 'Month Number'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Long'
+		lineageTag: 761581f7-284d-42c9-bcd5-9311c9e10572
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Month Long]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quarter
+		lineageTag: 919064af-3d13-456d-a7b1-6b3634761a7e
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Quarter]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Year Quarter'
+		lineageTag: 4db3f3b8-a277-4e29-b3bc-a2f9474a8270
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Year Quarter]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Year Month'
+		lineageTag: c6ef42e7-075e-4b1d-9a77-ebc75f9bba58
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Year Month]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Year Month Sort'
+		formatString: 0
+		lineageTag: e8c90ef1-7fd9-436a-8890-1e64584ddaa4
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Year Month Sort]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Day of Week Number'
+		formatString: 0
+		lineageTag: 2758f2ff-9e56-44f3-a2cd-413a6217a59a
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Day of Week Number]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Day of Week'
+		lineageTag: 542970a5-82de-4408-9780-5cd9b3dfd98f
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Day of Week]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimDate = calculated
+		mode: import
+		source = ```
+				
+				-- 1. Define the boundary dates based on our leasing portfolio history
+				VAR MinYear = 2024
+				VAR MaxYear = 2027
+				VAR BaseCalendar = 
+				    CALENDAR(
+				        DATE(MinYear, 1, 1), 
+				        DATE(MaxYear, 12, 31)
+				    )
+				RETURN
+				    ADDCOLUMNS(
+				        BaseCalendar,
+				        -- The Integer Key used to join with FactLeaseMetrics[DateKey] (e.g., 20260520)
+				        "DateKey", INT(FORMAT([Date], "YYYYMMDD")),
+				        "Year", YEAR([Date]),
+				        "Month Number", MONTH([Date]),
+				        -- Short month format for clean dashboard visuals (e.g., "Jan")
+				        "Month Short", FORMAT([Date], "MMM"),
+				        "Month Long", FORMAT([Date], "MMMM"),
+				        "Quarter", "Q" & FORMAT([Date], "Q"),
+				        "Year Quarter", FORMAT([Date], "YYYY") & " Q" & FORMAT([Date], "Q"),
+				        "Year Month", FORMAT([Date], "YYYY-MM"),
+				        -- For sorting month text chronologically instead of alphabetically
+				        "Year Month Sort", INT(FORMAT([Date], "YYYYMM")),
+				        "Day of Week Number", WEEKDAY([Date], 2), -- 1 = Monday, 7 = Sunday
+				        "Day of Week", FORMAT([Date], "DDDD")
+				    )
+				```
+
+	annotation PBI_Id = 5026e141a3214cd297e3494c1fb3f3b3
+

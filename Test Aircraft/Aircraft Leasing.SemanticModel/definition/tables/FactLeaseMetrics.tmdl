@@ -1,0 +1,119 @@
+table FactLeaseMetrics
+	lineageTag: 6d2ba9ea-0f45-47f5-95af-6d4fc7330a5b
+
+	measure 'Total Portfolio Revenue' = sum(FactLeaseMetrics[MonthlyRent])
+		lineageTag: d46497ac-7534-4eb2-a772-4d8ded8fb3bf
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Measure = DATEDIFF()
+		lineageTag: 23496455-81ee-4eab-85da-4cbc299102d9
+
+	measure DimDate
+		lineageTag: b0945e32-18d8-4ca2-8514-d777f8d9321c
+
+	measure 'Previous Month Revenue' = CALCULATE([Total Portfolio Revenue],DATEADD(DimDate[Date],-1,MONTH))
+		lineageTag: a68ef7fe-9c06-45d7-a8a5-885748ba7e43
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'MOM Revenue %' = DIVIDE(([Total Portfolio Revenue]-[Previous Month Revenue]),[Previous Month Revenue])
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 46277246-ece1-4ffd-9395-6548fa10ccb9
+
+	column FactKey
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 9bc24092-1a6e-4ea0-91a2-a48039c93ce5
+		summarizeBy: count
+		sourceColumn: FactKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column DateKey
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: b5ca4899-9dee-4e55-9866-0957cb648842
+		summarizeBy: none
+		sourceColumn: DateKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column AircraftKey
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: e1c585fb-4ab6-4db7-90c3-881f08bd64ce
+		summarizeBy: none
+		sourceColumn: AircraftKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column LesseeKey
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 474384dd-125d-44e3-93ba-023d9a32e772
+		summarizeBy: none
+		sourceColumn: LesseeKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonthlyRent
+		dataType: double
+		sourceProviderType: decimal(18, 2)
+		lineageTag: 35e61ff4-f1f8-4726-8bb2-640c18b64788
+		summarizeBy: sum
+		sourceColumn: MonthlyRent
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column MaintenanceReserve
+		dataType: double
+		sourceProviderType: decimal(18, 2)
+		lineageTag: bc005b76-a840-4d59-8edb-906c56cc74ea
+		summarizeBy: sum
+		sourceColumn: MaintenanceReserve
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column UtilizationHours
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 3e4f54b2-faf9-4512-af68-1aadb3806a77
+		summarizeBy: sum
+		sourceColumn: UtilizationHours
+
+		annotation SummarizationSetBy = Automatic
+
+	column DelayedPaymentsDays
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 49743a98-8793-4bda-8701-981546d7603c
+		summarizeBy: sum
+		sourceColumn: DelayedPaymentsDays
+
+		annotation SummarizationSetBy = Automatic
+
+	partition FactLeaseMetrics = m
+		mode: directQuery
+		source =
+				let
+				    Source = Sql.Database("lavi-sql-server-2026.database.windows.net", "free-sql-db-2644020"),
+				    dbo_FactLeaseMetrics = Source{[Schema="dbo",Item="FactLeaseMetrics"]}[Data]
+				in
+				    dbo_FactLeaseMetrics
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

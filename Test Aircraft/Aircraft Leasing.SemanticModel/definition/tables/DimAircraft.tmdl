@@ -1,0 +1,74 @@
+table DimAircraft
+	lineageTag: b0b40835-8dd9-413e-8a27-b37ba452c9e7
+
+	column AircraftKey
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 92dc130a-c011-4e98-b3bb-4bb8f996c79e
+		summarizeBy: none
+		sourceColumn: AircraftKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column MSN
+		dataType: string
+		sourceProviderType: varchar(50)
+		lineageTag: 38c98d0c-e710-43fb-b0aa-f00af8892909
+		summarizeBy: none
+		sourceColumn: MSN
+
+		annotation SummarizationSetBy = Automatic
+
+	column Model
+		dataType: string
+		sourceProviderType: varchar(50)
+		lineageTag: 190909c3-09ca-4a7b-905a-2357f2466890
+		summarizeBy: none
+		sourceColumn: Model
+
+		annotation SummarizationSetBy = Automatic
+
+	column Manufacturer
+		dataType: string
+		sourceProviderType: varchar(50)
+		lineageTag: ad4becf0-585d-4dee-b4c8-d462606be811
+		summarizeBy: none
+		sourceColumn: Manufacturer
+
+		annotation SummarizationSetBy = Automatic
+
+	column AssetValue
+		dataType: double
+		sourceProviderType: decimal(18, 2)
+		lineageTag: b62fa1fd-f8df-4e4c-a3d3-f395c9e0a873
+		summarizeBy: none
+		sourceColumn: AssetValue
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Status
+		dataType: string
+		sourceProviderType: varchar(20)
+		lineageTag: 70a21fe9-a05d-4ff7-99d2-b5ff7d3e83be
+		summarizeBy: none
+		sourceColumn: Status
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimAircraft = m
+		mode: directQuery
+		source =
+				let
+				    Source = Sql.Database("lavi-sql-server-2026.database.windows.net", "free-sql-db-2644020"),
+				    dbo_DimAircraft = Source{[Schema="dbo",Item="DimAircraft"]}[Data]
+				in
+				    dbo_DimAircraft
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

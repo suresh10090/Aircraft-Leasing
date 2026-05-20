@@ -1,0 +1,63 @@
+table DimLessee
+	lineageTag: 0c0655c5-c2f1-4daf-bd26-a5374de04469
+
+	column LesseeKey
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: f512b11b-ba13-46fd-82c5-b75b07acbcf3
+		summarizeBy: none
+		sourceColumn: LesseeKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column AirlineName
+		dataType: string
+		sourceProviderType: varchar(100)
+		lineageTag: 67830bb2-d01b-44e2-a4ef-4bad3ec254a3
+		summarizeBy: none
+		sourceColumn: AirlineName
+
+		annotation SummarizationSetBy = Automatic
+
+	column Region
+		dataType: string
+		sourceProviderType: varchar(50)
+		lineageTag: b6553400-5868-4905-b3c1-217a71e73eab
+		summarizeBy: none
+		sourceColumn: Region
+
+		annotation SummarizationSetBy = Automatic
+
+	column CreditRating
+		dataType: string
+		sourceProviderType: varchar(10)
+		lineageTag: 4d6dc48b-a8b0-47f3-a9f9-1f92694d646f
+		summarizeBy: none
+		sourceColumn: CreditRating
+
+		annotation SummarizationSetBy = Automatic
+
+	column RiskCategory
+		dataType: string
+		sourceProviderType: varchar(10)
+		lineageTag: c92d60a7-ce0f-46aa-852f-4d44938fd376
+		summarizeBy: none
+		sourceColumn: RiskCategory
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimLessee = m
+		mode: directQuery
+		source =
+				let
+				    Source = Sql.Database("lavi-sql-server-2026.database.windows.net", "free-sql-db-2644020"),
+				    dbo_DimLessee = Source{[Schema="dbo",Item="DimLessee"]}[Data]
+				in
+				    dbo_DimLessee
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

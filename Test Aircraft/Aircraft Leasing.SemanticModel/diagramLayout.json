@@ -1,0 +1,74 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 167.19999694824219,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 0,
+            "y": 24
+          },
+          "nodeIndex": "DimAircraft",
+          "nodeLineageTag": "b0b40835-8dd9-413e-8a27-b37ba452c9e7",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 456,
+            "y": 0
+          },
+          "nodeIndex": "DimLessee",
+          "nodeLineageTag": "0c0655c5-c2f1-4daf-bd26-a5374de04469",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 278,
+            "y": 217
+          },
+          "nodeIndex": "FactLeaseMetrics",
+          "nodeLineageTag": "6d2ba9ea-0f45-47f5-95af-6d4fc7330a5b",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 817,
+            "y": 0
+          },
+          "nodeIndex": "DimDate",
+          "nodeLineageTag": "6c6e019f-c677-4489-a9cb-3e88c184991f",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}

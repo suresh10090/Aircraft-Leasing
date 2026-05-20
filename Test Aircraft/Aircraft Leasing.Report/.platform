@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "Aircraft Leasing"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "aa599a60-1155-4656-a938-809385d44ebe"
+  }
+}

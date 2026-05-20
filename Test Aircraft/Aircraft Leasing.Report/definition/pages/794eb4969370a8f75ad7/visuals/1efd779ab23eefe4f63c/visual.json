@@ -1,0 +1,89 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "1efd779ab23eefe4f63c",
+  "position": {
+    "x": 554,
+    "y": 0,
+    "z": 2,
+    "height": 368,
+    "width": 528,
+    "tabOrder": 2
+  },
+  "visual": {
+    "visualType": "lineStackedColumnComboChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DimDate"
+                    }
+                  },
+                  "Property": "Month Short"
+                }
+              },
+              "queryRef": "DimDate.Month Short",
+              "nativeQueryRef": "Month Short",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactLeaseMetrics"
+                    }
+                  },
+                  "Property": "Total Portfolio Revenue"
+                }
+              },
+              "queryRef": "FactLeaseMetrics.Total Portfolio Revenue",
+              "nativeQueryRef": "Total Portfolio Revenue"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "8753a983985bb4b7c266",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DimDate"
+              }
+            },
+            "Property": "Month Short"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "26615d0d97e76f828b7c",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactLeaseMetrics"
+              }
+            },
+            "Property": "Total Portfolio Revenue"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

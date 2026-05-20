@@ -1,0 +1,139 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "7c3cf740bee21a010953",
+  "position": {
+    "x": 16,
+    "y": 384,
+    "z": 1,
+    "height": 336,
+    "width": 560,
+    "tabOrder": 1
+  },
+  "visual": {
+    "visualType": "treemap",
+    "query": {
+      "queryState": {
+        "Details": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DimLessee"
+                    }
+                  },
+                  "Property": "CreditRating"
+                }
+              },
+              "queryRef": "DimLessee.CreditRating",
+              "nativeQueryRef": "CreditRating"
+            }
+          ]
+        },
+        "Group": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DimLessee"
+                    }
+                  },
+                  "Property": "AirlineName"
+                }
+              },
+              "queryRef": "DimLessee.AirlineName",
+              "nativeQueryRef": "AirlineName",
+              "active": true
+            }
+          ]
+        },
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactLeaseMetrics"
+                    }
+                  },
+                  "Property": "Total Portfolio Revenue"
+                }
+              },
+              "queryRef": "FactLeaseMetrics.Total Portfolio Revenue",
+              "nativeQueryRef": "Total Portfolio Revenue"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "FactLeaseMetrics"
+                  }
+                },
+                "Property": "Total Portfolio Revenue"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "2add9a1dc222f3070754",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactLeaseMetrics"
+              }
+            },
+            "Property": "Total Portfolio Revenue"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "afe7707ef1cacf939663",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DimLessee"
+              }
+            },
+            "Property": "AirlineName"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "d56204101db92d1b8f30",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DimLessee"
+              }
+            },
+            "Property": "CreditRating"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
+  }
+}
