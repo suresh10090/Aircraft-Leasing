@@ -1,16 +1,16 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
-  "name": "4cbf3b6641e97e263aab",
+  "name": "f4ce9bae7bccf580e351",
   "position": {
-    "x": 16,
+    "x": 576,
     "y": 0,
-    "z": 0,
+    "z": 4,
     "height": 368,
-    "width": 528,
-    "tabOrder": 0
+    "width": 506,
+    "tabOrder": 4
   },
   "visual": {
-    "visualType": "lineStackedColumnComboChart",
+    "visualType": "waterfallChart",
     "query": {
       "queryState": {
         "Category": {
@@ -20,33 +20,15 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "DimDate"
+                      "Entity": "DimAircraft"
                     }
                   },
-                  "Property": "Month Long"
+                  "Property": "Model"
                 }
               },
-              "queryRef": "DimDate.Month Long",
-              "nativeQueryRef": "Month Long",
+              "queryRef": "DimAircraft.Model",
+              "nativeQueryRef": "Model",
               "active": true
-            }
-          ]
-        },
-        "Series": {
-          "projections": [
-            {
-              "field": {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "DimDate"
-                    }
-                  },
-                  "Property": "Month Long"
-                }
-              },
-              "queryRef": "DimDate.Month Long",
-              "nativeQueryRef": "Month Long"
             }
           ]
         },
@@ -93,7 +75,21 @@
   "filterConfig": {
     "filters": [
       {
-        "name": "f478f40802cfedf714ad",
+        "name": "bba61cf6b982a2b0cfe9",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DimAircraft"
+              }
+            },
+            "Property": "Model"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "08c1203cd7dabc20507c",
         "field": {
           "Measure": {
             "Expression": {
@@ -105,20 +101,6 @@
           }
         },
         "type": "Advanced"
-      },
-      {
-        "name": "d2b3ada74b221b01a69a",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "DimDate"
-              }
-            },
-            "Property": "Month Long"
-          }
-        },
-        "type": "Categorical"
       }
     ]
   }
