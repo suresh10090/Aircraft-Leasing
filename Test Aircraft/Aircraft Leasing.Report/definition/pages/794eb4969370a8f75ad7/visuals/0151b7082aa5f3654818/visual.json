@@ -1,0 +1,107 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "0151b7082aa5f3654818",
+  "position": {
+    "x": 576,
+    "y": 384,
+    "z": 3,
+    "height": 336,
+    "width": 506,
+    "tabOrder": 3
+  },
+  "visual": {
+    "visualType": "lineChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DimLessee"
+                    }
+                  },
+                  "Property": "AirlineName"
+                }
+              },
+              "queryRef": "DimLessee.AirlineName",
+              "nativeQueryRef": "AirlineName",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactLeaseMetrics"
+                    }
+                  },
+                  "Property": "Total Portfolio Revenue"
+                }
+              },
+              "queryRef": "FactLeaseMetrics.Total Portfolio Revenue",
+              "nativeQueryRef": "Total Portfolio Revenue"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "FactLeaseMetrics"
+                  }
+                },
+                "Property": "Total Portfolio Revenue"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "f863a60201859ccab55d",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DimLessee"
+              }
+            },
+            "Property": "AirlineName"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "4941cfe9c87aa228659c",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactLeaseMetrics"
+              }
+            },
+            "Property": "Total Portfolio Revenue"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}
